@@ -1,4 +1,37 @@
 <%- include('header.ejs') %>
 
+    <div class="headline">
+        <h1>Latest Headlines</h1>
+    </div>
+    <main>
+        <article class="latest-main">
+            <img src="<%= data.NewsItem[0].Image.Photo %>" alt="hero_img">
+            <div class="tags">
+                <% for (let i=0; i<=2; i++) {%>
+                    <div class="tag"><%=tags[i]%></div>
+                    <%}%>
+            </div>
+            <h1><%= data.NewsItem[0].HeadLine %></h1>
+            <div class="tagLines">
+                <span class="dateline"><%= data.NewsItem[0].DateLine %></span>
+            <span class="byline">-<%= data.NewsItem[0].ByLine %></span>
+            </div>         
+        </article>
+        <aside>
+            <article>
+                <img src="<%= data.NewsItem[1].Image.Photo %>" alt="image displaying the article">
+                <div class="article-details">
+                    <h1><%= data.NewsItem[1].HeadLine %></h1>
+                    <p><%= data.NewsItem[1].Caption.slice(0, 200) %>...</p>
+                </div>
+            </article>
+            <article>
+                <img src="<%= data.NewsItem[2].Image.Photo %>" alt="image displaying the article">
+            </article>
+        </aside>
+    </main>
+        
 
-    <%- include('footer.ejs') %>
+
+
+    <%- include('footer.ejs') %> 

@@ -35,8 +35,9 @@ app.use(async (req, res, next) => {
         });
 })
 app.get('/', async (req, res) => {
+    const tags =data.NewsItem[0].Keywords.split(',');
     parsedDate = currentDate.toLocaleDateString('us-EN', options);
-    res.render('index', { date: parsedDate });
+    res.render('index', { date: parsedDate, data: data, tags });
 })
 
 app.listen(3000, (req, res) => {
