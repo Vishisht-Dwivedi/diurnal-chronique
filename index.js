@@ -2,7 +2,8 @@
 const express = require('express');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
-const path = require('path')
+const axios = require('axios');
+const path = require('path');
 const app = express();
 
 //using and setting paths
@@ -20,8 +21,19 @@ const options = {
     day: 'numeric',
 };
 let parsedDate;
-
+let data;
 //routes
+app.use(async (req, res, next) => {
+    axios.get('https://timesofindia.indiatimes.com/feeds/newsdefaultfeeds.cms?feedtype=sjson#')
+        .then((response) => {
+            data = response.data;
+            next();
+        })
+        .catch((err) => {
+            console.log(err)
+            next();
+        });
+})
 app.get('/', async (req, res) => {
     parsedDate = currentDate.toLocaleDateString('us-EN', options);
     res.render('index', { date: parsedDate });

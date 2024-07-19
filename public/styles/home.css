@@ -3,11 +3,11 @@ body {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    margin: 0 2rem;
+    background-color: #fffefa;
+    min-height: 100vh;
 }
 
-.page-header {
-    margin: 0 1rem;
-}
 
 .header-abt-day {
     display: flex;
@@ -16,4 +16,88 @@ body {
     border-bottom: 10px solid black;
     box-sizing: border-box;
     padding: 0.5rem 0;
+}
+
+.header-main {
+    display: flex;
+    padding: 2rem 0;
+}
+
+.header-logo {
+    font-family: "UnifrakturMaguntia", cursive;
+    font-weight: 500;
+    font-size: 80px;
+    font-style: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-wrap: wrap;
+    margin: 0 auto;
+}
+
+.header-logo img {
+    width: 400px;
+}
+
+.header-main-support {
+    text-wrap: wrap;
+    width: 1fr;
+    justify-self: flex-start;
+    align-self: flex-start;
+}
+
+.header-support-cta {
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.header-main-support summary {
+    color: gray;
+    font-size: 14px;
+    margin-top: 0.2rem;
+}
+
+.header-main-support button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    border-radius: 50px;
+    background-color: #fffefa;
+    border: 1px solid gray;
+    padding: 0.3rem 1rem;
+}
+
+.header-search {
+    justify-self: flex-end;
+    align-self: center;
+}
+
+.header-search img {
+    width: 40px;
+    margin: 0.5rem;
+}
+
+.header-search img:nth-of-type(2) {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.main-nav {
+    border-top: 2px solid #c5c5c5;
+    border-bottom: 2px solid #c5c5c5;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-collapse {
+    display: flex;
+}
+
+.nav-collapse p {
+    margin-left: 1em;
 }
