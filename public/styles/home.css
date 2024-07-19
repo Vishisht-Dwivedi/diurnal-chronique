@@ -1,0 +1,19 @@
+body {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.page-header {
+    margin: 0 1rem;
+}
+
+.header-abt-day {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    border-bottom: 10px solid black;
+    box-sizing: border-box;
+    padding: 0.5rem 0;
+}
