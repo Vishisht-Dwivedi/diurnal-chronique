@@ -22,11 +22,17 @@ const options = {
 };
 let parsedDate;
 let data;
+let tagsArr;
 //routes
 app.use(async (req, res, next) => {
     axios.get('https://timesofindia.indiatimes.com/feeds/newsdefaultfeeds.cms?feedtype=sjson#')
         .then((response) => {
             data = response.data;
+            tagsArr = [];
+            for (let e of data.NewsItem) {
+                const tags = e.Keywords.split(',');
+                tagsArr.push(tags);
+            }
             next();
         })
         .catch((err) => {
@@ -35,9 +41,9 @@ app.use(async (req, res, next) => {
         });
 })
 app.get('/', async (req, res) => {
-    const tags = data.NewsItem[0].Keywords.split(',');
+
     parsedDate = currentDate.toLocaleDateString('us-EN', options);
-    res.render('index', { date: parsedDate, data: data, tags });
+    res.render('index', { date: parsedDate, data: data, tagsArr: tagsArr });
 })
 
 app.listen(3000, (req, res) => {

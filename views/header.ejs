@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <!-- Content Font -->
+    <link rel="stylesheet" href="styles/header-styles.css">
     <link rel="stylesheet" href="styles/home.css">
+    <!-- Content Font -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
@@ -52,11 +54,19 @@
             <img src="assets/three-nav.svg" style="width:20px" alt="menu">
             <p>More Sections</p>
         </div>
-        <div><a href="">Top Stories</a></div>
-        <div><a href="">India</a></div>
-        <div><a href="">World</a></div>
-        <div><a href="">Tech</a></div>
-        <div><a href="">Sports</a></div>
-        <div><a href="">City-wise</a></div>
-        <img src="assets/search.svg" alt="search-icon">
+        <div></div>
+        <div class="nav-links">
+            <a href="">Top Stories</a>
+            <a href="">India</a>
+            <a href="">World</a>
+            <a href="">Tech</a>
+            <a href="">Sports</a>
+            <a href="">City-wise</a>
+        </div>
+        <div></div>
+        <div class="nav-search">
+            <label for="nav-search"><input type="text" placeholder="Search" id="nav-search"></label>
+            <button type="submit"><img src="assets/search.svg" alt="search-icon"></button>
+        </div>
+
     </nav>
