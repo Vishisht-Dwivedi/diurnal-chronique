@@ -6,8 +6,11 @@
     <main>
         <section class="hero">
             <article class="latest-main">
-                <img src="<%= data.NewsItem[0].Image.Photo %>" alt="hero_img"
-                    onerror="this.src='assets/news-placeholder.png'">
+                <div class="latest-main-img">
+                    <img src="<%= data.NewsItem[0].Image.Photo %>" alt="hero_img"
+                        onerror="this.src='assets/news-placeholder.png'">
+                </div>
+
                 <div class="tags">
                     <% for (let i=0; i<=2; i++) {%>
                         <div class="tag">
