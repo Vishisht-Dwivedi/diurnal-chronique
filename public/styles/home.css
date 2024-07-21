@@ -11,6 +11,10 @@
     background-color: rgb(243, 243, 243);
 }
 
+.latest-main .tag {
+    margin: 1rem 0 0.3rem;
+}
+
 .tagLines {
     align-self: flex-end;
     display: flex;
