@@ -27,7 +27,13 @@ let tagsArr;
 app.use(async (req, res, next) => {
     axios.get('https://timesofindia.indiatimes.com/feeds/newsdefaultfeeds.cms?feedtype=sjson#')
         .then((response) => {
-            data = response.data;
+            if (response.data.NewsItem.length % 2 === 0) {
+                data = response.data;
+            } else {
+                const changedArray = response.data.NewsItem.slice(0, -1);
+                response.data.NewsItem = changedArray;
+                data = response.data;
+            }
             tagsArr = [];
             for (let e of data.NewsItem) {
                 const tags = e.Keywords.split(',');

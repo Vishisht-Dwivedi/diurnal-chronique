@@ -4,4 +4,57 @@
         <h1>Latest Headlines</h1>
     </div>
     <%- include('hero.ejs') %>
+        <!-- 
+        <div class="read-more">
+            <div class="read-more-btn">
+                Read More
+            </div>
+        </div> -->
+        <section class="more-items-section">
+            <div class="headline">
+                <h1>More Headlines</h1>
+            </div>
+            <div class="more-items">
+
+                <% for (let i=4; i<data.NewsItem.length;i++) { %>
+                    <article class="aside-articles">
+                        <div class="article-img">
+                            <img src="<%= data.NewsItem[i].Image.Photo %>" alt="No image could be displayed"
+                                onerror="this.src='assets/news-placeholder.png'" loading="lazy">
+                        </div>
+                        <div class="article-details">
+                            <div>
+                                <% if (tagsArr[i][0]) {%>
+                                    <div class="tags">
+                                        <% for (let j=0; j<=2; j++) {%>
+                                            <div class="tag">
+                                                <%=tagsArr[i][j]%>
+                                            </div>
+                                            <%}%>
+                                    </div>
+                                    <%}%>
+                                        <h2>
+                                            <%= data.NewsItem[i].HeadLine %>
+                                        </h2>
+                            </div>
+
+                            <div class="tagLines">
+                                <span class="dateline">
+                                    <%= data.NewsItem[i].DateLine %>
+                                </span>
+                                <span class="byline">-
+                                    <%if (data.NewsItem[i].ByLine) {%>
+                                        <%= data.NewsItem[i].ByLine %>
+                                            <%} else {%>
+                                                Times Of India
+                                                <%}%>
+                                </span>
+                            </div>
+                        </div>
+
+                    </article>
+                    <% }%>
+            </div>
+        </section>
+
         <%- include('footer.ejs') %>
