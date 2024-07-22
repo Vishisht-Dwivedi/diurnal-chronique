@@ -16,9 +16,10 @@
 }
 
 .tagLines {
-    margin-top: 2rem;
+    margin-top: 1rem;
     align-self: flex-end;
     display: flex;
+    width: 100%;
     justify-content: space-between;
     font-size: 0.8cqw;
     color: rgb(134, 133, 131);
@@ -42,7 +43,7 @@
     padding: 1rem;
 }
 
-.hero h1 {
+.hero h2 {
     font-size: 1.2em;
 }
 
@@ -53,10 +54,13 @@
     background-color: #fffefa;
     padding: 1rem;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .latest-main .latest-main-caption {
-    font-size: 0.8cqw;
+    font-size: 1em;
 }
 
 .latest-main-img {
@@ -94,4 +98,10 @@
     width: 100%;
     height: 100%;
     border-radius: 5px;
+}
+
+.article-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

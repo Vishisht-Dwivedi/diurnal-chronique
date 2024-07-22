@@ -1,0 +1,86 @@
+<main>
+    <section class="hero">
+        <article class="latest-main">
+            <div class="latest-main-img">
+                <img src="<%= data.NewsItem[0].Image.Photo %>" alt="hero_img"
+                    onerror="this.src='assets/news-placeholder.png'">
+
+                <% if (tagsArr[0][0]) {%>
+                    <div class="tags">
+                        <% for (let i=0; i<=2; i++) {%>
+                            <div class="tag">
+                                <%=tagsArr[0][i]%>
+                            </div>
+                            <%}%>
+                    </div>
+                    <%}%>
+            </div>
+            <div class="article-content">
+                <h2>
+                    <%= data.NewsItem[0].HeadLine %>
+                </h2>
+                <div class="latest-main-caption">
+                    <% if (!data.NewsItem[0].Caption) {%>
+                        <%= data.NewsItem[0].Story.slice(0,300)+'...' %>
+                            <%} else {%>
+                                <%= data.NewsItem[0].Caption.slice(0,300)+'...' %>
+                                    <%}%>
+                </div>
+            </div>
+
+            <div class="tagLines">
+                <span class="dateline">
+                    <%= data.NewsItem[0].DateLine %>
+                </span>
+                <span class="byline">-
+                    <%if (data.NewsItem[0].ByLine) {%>
+                        <%= data.NewsItem[0].ByLine %>
+                            <%} else {%>
+                                Times Of India
+                                <%}%>
+                </span>
+            </div>
+        </article>
+
+        <% for (let i=1; i<=3;i++) { %>
+            <article class="aside-articles">
+                <div class="article-img">
+                    <img src="<%= data.NewsItem[i].Image.Photo %>" alt="No image could be displayed"
+                        onerror="this.src='assets/news-placeholder.png'">
+                </div>
+                <div class="article-details">
+                    <div>
+                        <% if (tagsArr[i][0]) {%>
+                            <div class="tags">
+                                <% for (let j=0; j<=2; j++) {%>
+                                    <div class="tag">
+                                        <%=tagsArr[i][j]%>
+                                    </div>
+                                    <%}%>
+                            </div>
+                            <%}%>
+                                <h2>
+                                    <%= data.NewsItem[i].HeadLine %>
+                                </h2>
+                    </div>
+
+                    <div class="tagLines">
+                        <span class="dateline">
+                            <%= data.NewsItem[i].DateLine %>
+                        </span>
+                        <span class="byline">-
+                            <%if (data.NewsItem[i].ByLine) {%>
+                                <%= data.NewsItem[i].ByLine %>
+                                    <%} else {%>
+                                        Times Of India
+                                        <%}%>
+                        </span>
+                    </div>
+                </div>
+
+            </article>
+            <% }%>
+
+    </section>
+
+</main>
