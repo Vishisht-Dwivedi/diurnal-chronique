@@ -6,7 +6,7 @@
     background-color: #fffefa;
     border: 1px solid gray;
     padding: 0.3rem 0.7rem;
-    font-size: 12px;
+    font-size: 0.6cqw;
     font-weight: 600;
     background-color: rgb(243, 243, 243);
 }
@@ -16,9 +16,12 @@
 }
 
 .tagLines {
+    margin-top: 2rem;
     align-self: flex-end;
     display: flex;
     justify-content: space-between;
+    font-size: 0.8cqw;
+    color: rgb(134, 133, 131);
 }
 
 .tags {
@@ -39,12 +42,21 @@
     padding: 1rem;
 }
 
+.hero h1 {
+    font-size: 1.1cqw;
+}
+
 .latest-main {
     grid-area: 1/1/4/1;
     box-sizing: border-box;
     max-height: 100%;
     background-color: #fffefa;
     padding: 1rem;
+    border-radius: 5px;
+}
+
+.latest-main .latest-main-caption {
+    font-size: 0.8cqw;
 }
 
 .latest-main-img {

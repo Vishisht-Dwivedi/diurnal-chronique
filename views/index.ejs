@@ -22,7 +22,11 @@
                     <%= data.NewsItem[0].HeadLine %>
                 </h1>
                 <div class="latest-main-caption">
-                    <%= data.NewsItem[0].Caption %>
+                    <% if (!data.NewsItem[0].Caption) {%>
+                        <%= data.NewsItem[0].Story.slice(0,300)+'...' %>
+                            <%} else {%>
+                                <%= data.NewsItem[0].Caption %>
+                                    <%}%>
                 </div>
                 <div class="tagLines">
                     <span class="dateline">
