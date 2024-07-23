@@ -2,14 +2,13 @@
     <section class="hero">
         <article class="latest-main">
             <div class="latest-main-img">
-                <img src="<%= data.NewsItem[0].Image.Photo %>" alt="hero_img"
-                    onerror="this.src='assets/news-placeholder.png'">
+                <img src="<%= data[0].Photo %>" alt="hero_img" onerror="this.src='assets/news-placeholder.png'">
 
-                <% if (tagsArr[0][0]) {%>
+                <% if (data[0].Keywords[0]) {%>
                     <div class="tags">
                         <% for (let i=0; i<=2; i++) {%>
                             <div class="tag">
-                                <%=tagsArr[0][i]%>
+                                <%=data[0].Keywords[i]%>
                             </div>
                             <%}%>
                     </div>
@@ -17,24 +16,24 @@
             </div>
             <div class="article-content">
                 <h2>
-                    <%= data.NewsItem[0].HeadLine %>
+                    <%= data[0].Headline %>
                 </h2>
                 <div class="latest-main-caption">
-                    <% if (!data.NewsItem[0].Caption) {%>
-                        <%= data.NewsItem[0].Story.slice(0,300)+'...' %>
+                    <% if (!data[0].Caption) {%>
+                        <%= data[0].Story.slice(0,300)+'...' %>
                             <%} else {%>
-                                <%= data.NewsItem[0].Caption.slice(0,300)+'...' %>
+                                <%= data[0].Caption.slice(0,300)+'...' %>
                                     <%}%>
                 </div>
             </div>
 
             <div class="tagLines">
                 <span class="dateline">
-                    <%= data.NewsItem[0].DateLine %>
+                    <%= data[0].Date %>
                 </span>
                 <span class="byline">-
-                    <%if (data.NewsItem[0].ByLine) {%>
-                        <%= data.NewsItem[0].ByLine %>
+                    <%if (data[0].ByLine) {%>
+                        <%= data[0].ByLine %>
                             <%} else {%>
                                 Times Of India
                                 <%}%>
@@ -45,32 +44,32 @@
         <% for (let i=1; i<=3;i++) { %>
             <article class="aside-articles">
                 <div class="article-img">
-                    <img src="<%= data.NewsItem[i].Image.Photo %>" alt="No image could be displayed"
+                    <img src="<%= data[i].Photo %>" alt="No image could be displayed"
                         onerror="this.src='assets/news-placeholder.png'">
                 </div>
                 <div class="article-details">
                     <div>
-                        <% if (tagsArr[i][0]) {%>
+                        <% if (data[i].Keywords[0]) {%>
                             <div class="tags">
                                 <% for (let j=0; j<=2; j++) {%>
                                     <div class="tag">
-                                        <%=tagsArr[i][j]%>
+                                        <%=data[i].Keywords[j]%>
                                     </div>
                                     <%}%>
                             </div>
                             <%}%>
                                 <h2>
-                                    <%= data.NewsItem[i].HeadLine %>
+                                    <%= data[i].Headline %>
                                 </h2>
                     </div>
 
                     <div class="tagLines">
                         <span class="dateline">
-                            <%= data.NewsItem[i].DateLine %>
+                            <%= data[i].Date %>
                         </span>
                         <span class="byline">-
-                            <%if (data.NewsItem[i].ByLine) {%>
-                                <%= data.NewsItem[i].ByLine %>
+                            <%if (data[i].ByLine) {%>
+                                <%= data[i].ByLine %>
                                     <%} else {%>
                                         Times Of India
                                         <%}%>

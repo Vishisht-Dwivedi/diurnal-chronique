@@ -136,6 +136,7 @@ button {
 
 .nav-collapse {
     display: flex;
+    align-items: center;
 }
 
 .nav-collapse p {
