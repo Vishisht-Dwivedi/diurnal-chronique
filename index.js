@@ -104,12 +104,34 @@ async function getDataAndUpdate(model, Object, apiURL) {
             console.log("Error in connection with API->", err);
         });
 }
+//setting up a cache to store timestamps
+
+const cache = {}
+cache['thlTimeStamp'] = `${currentDate.getHours()} ${currentDate.getMinutes()}`;
+//Calling API every 30 minutes
+setInterval(() => {
+    getDataAndUpdate(topNewsModel, TopHeadlinesObj, topHeadlinesAPI);
+    let currentDate = new Date();
+    cache['thlTimeStamp'] = `${currentDate.getHours()} ${currentDate.getMinutes()}`;
+}, 180000)
 
 
 //routes
 app.get('/', async (req, res) => {
-    getDataAndUpdate(topNewsModel, TopHeadlinesObj, topHeadlinesAPI);
-    data = await topNewsModel.find({}).sort({ DateNumber: -1 }).limit(26);
+    //checking to see if objects in database aren't older than 10 minutes from current time, if they are call api getter again
+    let currentDate = new Date();
+    let currentTime = `${currentDate.getHours()} ${currentDate.getMinutes()}`;
+
+    if (Number(currentTime.split(' ').join('')) - Number(cache['thlTimeStamp'].split(' ').join('')) > 10) {
+
+        getDataAndUpdate(topNewsModel, TopHeadlinesObj, topHeadlinesAPI);
+
+        cache['thlTimeStamp'] = currentTime;
+        data = await topNewsModel.find({}).sort({ DateNumber: -1 }).limit(26);
+        console.log('update');
+    } else {
+        data = await topNewsModel.find({}).sort({ DateNumber: -1 }).limit(26);
+    }
     parsedDate = currentDate.toLocaleDateString('us-EN', options);
     res.render('index', { date: parsedDate, data: data });
 })
