@@ -1,4 +1,4 @@
-/* .read-more {
+.read-more {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
@@ -18,7 +18,7 @@
     color: rgb(252, 244, 229);
     font-weight: 700;
     cursor: pointer;
-} */
+}
 
 .more-items {
     background-color: gray;
@@ -31,9 +31,17 @@
 }
 
 .more-items .aside-articles {
-    max-height: 170px;
+    max-height: 120px;
+    font-size: 14px;
 }
 
 .more-items .aside-articles .article-img {
-    max-height: 150px;
+    box-sizing: border-box;
+    padding: 5px;
+    max-height: 100px;
+    background-color: white;
+}
+
+.more-items .aside-articles .article-img img {
+    border-radius: 1rem;
 }

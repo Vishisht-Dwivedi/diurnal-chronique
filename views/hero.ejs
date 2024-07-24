@@ -3,30 +3,19 @@
         <article class="latest-main">
             <div class="latest-main-img">
                 <img src="<%= data[0].Photo %>" alt="hero_img" onerror="this.src='assets/news-placeholder.png'">
-
-                <% if (data[0].Keywords[0]) {%>
-                    <div class="tags">
-                        <% for (let i=0; i<=2; i++) {%>
-                            <div class="tag">
-                                <%=data[0].Keywords[i]%>
-                            </div>
-                            <%}%>
-                    </div>
-                    <%}%>
             </div>
             <div class="article-content">
                 <h2>
                     <%= data[0].Headline %>
                 </h2>
-                <div class="latest-main-caption">
-                    <% if (!data[0].Caption) {%>
-                        <%= data[0].Story.slice(0,300)+'...' %>
-                            <%} else {%>
-                                <%= data[0].Caption.slice(0,300)+'...' %>
-                                    <%}%>
-                </div>
             </div>
-
+            <div class="caption">
+                <% if (!data[0].Caption) {%>
+                    <%= data[0].Story.slice(0,300)+'...' %>
+                        <%} else {%>
+                            <%= data[0].Caption.slice(0,300)+'...' %>
+                                <%}%>
+            </div>
             <div class="tagLines">
                 <span class="dateline">
                     <%= data[0].Date %>
@@ -50,17 +39,18 @@
                 <div class="article-details">
                     <div>
                         <% if (data[i].Keywords[0]) {%>
-                            <div class="tags">
-                                <% for (let j=0; j<=2; j++) {%>
-                                    <div class="tag">
-                                        <%=data[i].Keywords[j]%>
-                                    </div>
-                                    <%}%>
-                            </div>
+
                             <%}%>
                                 <h2>
                                     <%= data[i].Headline %>
                                 </h2>
+                    </div>
+                    <div class="caption">
+                        <% if (!data[i].Caption) {%>
+                            <%= data[i].Story.slice(0,150)+'...' %>
+                                <%} else {%>
+                                    <%= data[i].Caption.slice(0,150)+'...' %>
+                                        <%}%>
                     </div>
 
                     <div class="tagLines">

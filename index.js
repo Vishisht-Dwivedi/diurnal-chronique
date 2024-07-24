@@ -27,8 +27,8 @@ const options = {
     month: 'long',
     day: 'numeric',
 };
+// Important inside routes
 let parsedDate;
-let data;
 //date Parsing
 function dateConstructor(dateline) {
     const dateArr = dateline.split(',').join('').split(' ');
@@ -105,33 +105,32 @@ async function getDataAndUpdate(model, Object, apiURL) {
         });
 }
 //setting up a cache to store timestamps
-
 const cache = {}
-cache['thlTimeStamp'] = `${currentDate.getHours()} ${currentDate.getMinutes()}`;
+//initial call to the API
+getDataAndUpdate(topNewsModel, TopHeadlinesObj, topHeadlinesAPI);
+cache['thlTimeStamp'] = Date.now();
 //Calling API every 30 minutes
 setInterval(() => {
-    getDataAndUpdate(topNewsModel, TopHeadlinesObj, topHeadlinesAPI);
-    let currentDate = new Date();
-    cache['thlTimeStamp'] = `${currentDate.getHours()} ${currentDate.getMinutes()}`;
-}, 180000)
-
+    cacheTimestampChecker(topNewsModel, 'thlTimeStamp', TopHeadlinesObj, topHeadlinesAPI);
+}, 1800000)
+//checker function to check difference in timestamps of API calls
+async function cacheTimestampChecker(Model, cacheKey, Obj, apiURL) {
+    let data;
+    //checking to see if objects in database aren't older than 10 minutes from current time, if they are call api getter again
+    let currentTime = Date.now();
+    if (currentTime - (cache[cacheKey] || 0) > 600000) {
+        getDataAndUpdate(Model, Obj, apiURL);
+        cache[cacheKey] = currentTime;
+        data = await Model.find({}).sort({ DateNumber: -1 }).limit(26);
+    } else {
+        data = await Model.find({}).sort({ DateNumber: -1 }).limit(26);
+    }
+    return data;
+}
 
 //routes
 app.get('/', async (req, res) => {
-    //checking to see if objects in database aren't older than 10 minutes from current time, if they are call api getter again
-    let currentDate = new Date();
-    let currentTime = `${currentDate.getHours()} ${currentDate.getMinutes()}`;
-
-    if (Number(currentTime.split(' ').join('')) - Number(cache['thlTimeStamp'].split(' ').join('')) > 10) {
-
-        getDataAndUpdate(topNewsModel, TopHeadlinesObj, topHeadlinesAPI);
-
-        cache['thlTimeStamp'] = currentTime;
-        data = await topNewsModel.find({}).sort({ DateNumber: -1 }).limit(26);
-        console.log('update');
-    } else {
-        data = await topNewsModel.find({}).sort({ DateNumber: -1 }).limit(26);
-    }
+    let data = await cacheTimestampChecker(topNewsModel, 'thlTimeStamp', TopHeadlinesObj, topHeadlinesAPI);
     parsedDate = currentDate.toLocaleDateString('us-EN', options);
     res.render('index', { date: parsedDate, data: data });
 })

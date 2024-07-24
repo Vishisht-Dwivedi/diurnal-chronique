@@ -4,12 +4,6 @@
         <h1>Latest Headlines</h1>
     </div>
     <%- include('hero.ejs') %>
-        <!-- 
-        <div class="read-more">
-            <div class="read-more-btn">
-                Read More
-            </div>
-        </div> -->
         <section class="more-items-section">
             <div class="headline">
                 <h1>More Headlines</h1>
@@ -24,18 +18,14 @@
                         </div>
                         <div class="article-details">
                             <div>
-                                <% if (data[i].Keywords[0]) {%>
-                                    <div class="tags">
-                                        <% for (let j=0; j<=2; j++) {%>
-                                            <div class="tag">
-                                                <%=data[i].Keywords[j]%>
-                                            </div>
-                                            <%}%>
-                                    </div>
-                                    <%}%>
-                                        <h2>
-                                            <%= data[i].Headline %>
-                                        </h2>
+                                <h2>
+                                    <%if (data[i].Headline.length> 80) { %>
+                                        <%= data[i].Headline.slice(0,80) + '...' %>
+                                            <% } else {%>
+                                                <%= data[i].Headline %>
+                                                    <%}%>
+
+                                </h2>
                             </div>
 
                             <div class="tagLines">
@@ -56,5 +46,10 @@
                     <% }%>
             </div>
         </section>
+        <div class="read-more">
+            <div class="read-more-btn">
+                Read More
+            </div>
+        </div>
 
         <%- include('footer.ejs') %>
