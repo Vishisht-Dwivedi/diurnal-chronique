@@ -1,75 +1,58 @@
 <main>
     <section class="hero">
-        <article class="latest-main">
-            <div class="latest-main-img">
-                <img src="<%= data[0].Photo %>" alt="hero_img" onerror="this.src='assets/news-placeholder.png'">
+        <div class="hero-sub"></div>
+        <div class="hero-main-wrapper">
+            <div class="hero-main-heading">
+                <h1>Latest News</h1>
             </div>
-            <div class="article-content">
-                <h2>
-                    <%= data[0].Headline %>
-                </h2>
-            </div>
-            <div class="caption">
-                <% if (!data[0].Caption) {%>
-                    <%= data[0].Story.slice(0,300)+'...' %>
-                        <%} else {%>
-                            <%= data[0].Caption.slice(0,300)+'...' %>
-                                <%}%>
-            </div>
-            <div class="tagLines">
-                <span class="dateline">
-                    <%= data[0].Date %>
-                </span>
-                <span class="byline">-
-                    <%if (data[0].ByLine) {%>
-                        <%= data[0].ByLine %>
-                            <%} else {%>
-                                Times Of India
-                                <%}%>
-                </span>
-            </div>
-        </article>
-
-        <% for (let i=1; i<=3;i++) { %>
-            <article class="aside-articles">
-                <div class="article-img">
-                    <img src="<%= data[i].Photo %>" alt="No image could be displayed"
-                        onerror="this.src='assets/news-placeholder.png'">
+            <section class="hero-main">
+                <div class="hero-main-left">
+                    <div class="hero-main-left-img">
+                        <img src="<%= data[0].Photo %>" alt="">
+                    </div>
+                    <div class="hero-main-left-details">
+                        <h2>
+                            <%= data[0].Headline %>
+                        </h2>
+                        <p>
+                            <%= data[0].Caption %>
+                        </p>
+                        <div class="byline">
+                            <span>
+                                <%= data[0].Date %>
+                            </span>
+                            <span>
+                                -<%= data[0].ByLine %>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="article-details">
-                    <div>
-                        <% if (data[i].Keywords[0]) {%>
-
-                            <%}%>
+                <div class="hero-main-right">
+                    <% for (let i=1; i<=4;i++) { %>
+                        <article>
+                            <img src="<%= data[i].Photo %>" alt="article-img"
+                                onerror="this.src='assets/news-placeholder.png'">
+                            <div class="article-details">
                                 <h2>
                                     <%= data[i].Headline %>
                                 </h2>
-                    </div>
-                    <div class="caption">
-                        <% if (!data[i].Caption) {%>
-                            <%= data[i].Story.slice(0,150)+'...' %>
-                                <%} else {%>
-                                    <%= data[i].Caption.slice(0,150)+'...' %>
-                                        <%}%>
-                    </div>
-
-                    <div class="tagLines">
-                        <span class="dateline">
-                            <%= data[i].Date %>
-                        </span>
-                        <span class="byline">-
-                            <%if (data[i].ByLine) {%>
-                                <%= data[i].ByLine %>
-                                    <%} else {%>
-                                        Times Of India
-                                        <%}%>
-                        </span>
-                    </div>
+                                <div class="byline">
+                                    <span>
+                                        <%= data[i].Date %>
+                                    </span>
+                                    <span>
+                                        -<%= data[i].ByLine %>
+                                    </span>
+                                </div>
+                            </div>
+                        </article>
+                        <%}%>
                 </div>
 
-            </article>
-            <% }%>
+            </section>
+        </div>
 
+        <div class="hero-aside"></div>
     </section>
 
 </main>

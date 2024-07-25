@@ -97,7 +97,9 @@ async function getDataAndUpdate(model, Object, apiURL) {
         .then((response) => {
             const newsArr = response.data.NewsItem;
             for (let element of newsArr) {
-                updateToDB(model, Object, element);
+                if (!(element.Keywords.split(',')).includes('horoscope')) {
+                    updateToDB(model, Object, element);
+                }
             }
         })
         .catch((err) => {
