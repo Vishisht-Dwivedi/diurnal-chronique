@@ -1,9 +1,16 @@
 <main>
     <section class="hero">
-        <div class="hero-sub"></div>
+        <div class="hero-left-wrapper">
+            <div class="hero-main-heading">
+                <h1>BUSINESS</h1>
+            </div>
+            <section class="hero-left">
+            </section>
+        </div>
+        <!-- HERO MIDDLE -->
         <div class="hero-main-wrapper">
             <div class="hero-main-heading">
-                <h1>Latest News</h1>
+                <h1>LATEST NEWS</h1>
             </div>
             <section class="hero-main">
                 <div class="hero-main-left">
@@ -15,8 +22,13 @@
                             <%= data[0].Headline %>
                         </h2>
                         <p>
-                            <%= data[0].Caption %>
+                            <% if (data[0].Caption !=='' ) {%>
+                                <%= data[0].Caption %>
+                                    <%} else {%>
+                                        <%= data[0].Story.slice(0,300) + '...' %>
+                                            <%}%>
                         </p>
+
                         <div class="byline">
                             <span>
                                 <%= data[0].Date %>
@@ -52,7 +64,7 @@
             </section>
         </div>
 
-        <div class="hero-aside"></div>
+        <div class="hero-right"></div>
     </section>
 
 </main>

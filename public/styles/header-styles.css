@@ -125,6 +125,7 @@ button {
 /* NAV BAR */
 
 .main-nav {
+    font-family: oldnewspaper, serif;
     border-top: 2px solid #c5c5c5;
     border-bottom: 2px solid #c5c5c5;
     font-weight: 500;

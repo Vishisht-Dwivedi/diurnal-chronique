@@ -3,8 +3,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const axios = require('axios');
 const path = require('path');
+const { convertXML } = require("simple-xml-to-json");
 const app = express();
 const topNewsModel = require(path.join(__dirname, '/models/topNews'));
+const businessModel = require(path.join(__dirname, '/models/business'));
 //using and setting paths
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, '/views'));
@@ -81,25 +83,47 @@ class TopHeadlinesObj {
         this.DateNumber = dateConstructor(element.DateLine)
     }
 }
+class BusinessObj {
+    constructor(element) {
+        this.Headline = element.title;
+        this.Date = element.pubDate;
+        this.Photo = element.enclosure['@url'];
+        this.Caption = element.description.replace(/(<([^>]+)>)/gi, "");
+        this.WebURL = element.link;
+        this.DateNumber = Date.parse(element.pubDate);
+    }
+}
 //updating function that takes in the model to put data in, the constructor objects and the element which needs to be passed into the constructor functions.
 async function updateToDB(Model, Object, element) {
     const options = { upsert: true, new: true }
     const obj = new Object(element);
-    Model.findOneAndUpdate({ _id: Number(element.NewsItemId) }, obj, options)
-        .then(() => { return })
-        .catch((err) => console.log('Error in updating elements->', err));
+    if (!element.NewsItemId) {
+        Model.findOneAndUpdate({ _id: Number(element.link.slice(-13, -4)) }, obj, options)
+            .then(() => { return })
+            .catch((err) => console.log('Error in updating elements->', err));
+    } else {
+        Model.findOneAndUpdate({ _id: Number(element.NewsItemId) }, obj, options)
+            .then(() => { return })
+            .catch((err) => console.log('Error in updating elements->', err));
+    }
+
 }
 //API URLS
 const topHeadlinesAPI = "https://timesofindia.indiatimes.com/feeds/newsdefaultfeeds.cms?feedtype=sjson#";
+const businessAPI = "https://timesofindia.indiatimes.com/rssfeeds/1898055.cms?feedtype=sjson";
 //API HANDLING
 async function getDataAndUpdate(model, Object, apiURL) {
     return axios.get(apiURL)
         .then((response) => {
-            const newsArr = response.data.NewsItem;
+            let newsArr;
+            if (apiURL === topHeadlinesAPI) {
+                newsArr = response.data.NewsItem;
+            } else if (apiURL === businessAPI) {
+                newsArr = response.data.channel.item;
+            }
             for (let element of newsArr) {
-                if (!(element.Keywords.split(',')).includes('horoscope')) {
-                    updateToDB(model, Object, element);
-                }
+                updateToDB(model, Object, element);
+
             }
         })
         .catch((err) => {
@@ -108,9 +132,6 @@ async function getDataAndUpdate(model, Object, apiURL) {
 }
 //setting up a cache to store timestamps
 const cache = {}
-//initial call to the API
-getDataAndUpdate(topNewsModel, TopHeadlinesObj, topHeadlinesAPI);
-cache['thlTimeStamp'] = Date.now();
 //Calling API every 30 minutes
 setInterval(() => {
     cacheTimestampChecker(topNewsModel, 'thlTimeStamp', TopHeadlinesObj, topHeadlinesAPI);
@@ -123,9 +144,9 @@ async function cacheTimestampChecker(Model, cacheKey, Obj, apiURL) {
     if (currentTime - (cache[cacheKey] || 0) > 600000) {
         getDataAndUpdate(Model, Obj, apiURL);
         cache[cacheKey] = currentTime;
-        data = await Model.find({}).sort({ DateNumber: -1 }).limit(26);
+        data = await Model.find({}).sort({ DateNumber: -1 }).limit(5);
     } else {
-        data = await Model.find({}).sort({ DateNumber: -1 }).limit(26);
+        data = await Model.find({}).sort({ DateNumber: -1 }).limit(5);
     }
     return data;
 }
@@ -133,10 +154,11 @@ async function cacheTimestampChecker(Model, cacheKey, Obj, apiURL) {
 //routes
 app.get('/', async (req, res) => {
     let data = await cacheTimestampChecker(topNewsModel, 'thlTimeStamp', TopHeadlinesObj, topHeadlinesAPI);
+    let leftData = await cacheTimestampChecker(businessModel, 'businessTimeStamp', BusinessObj, businessAPI);
     parsedDate = currentDate.toLocaleDateString('us-EN', options);
-    res.render('index', { date: parsedDate, data: data });
+    res.render('index', { date: parsedDate, data: data, leftData: leftData });
 })
 
 app.listen(3000, (req, res) => {
     console.log('server working on port 3000')
-})
+});

@@ -1,23 +1,31 @@
-.passing-headlines {
-    margin-top: 0.5rem;
-    background-color: lightgrey;
-    height: 2rem;
+.hero img {
+    border: 5px solid black;
+    box-sizing: border-box;
 }
 
 /* Hero */
 .hero {
     margin: 1rem 0;
-    max-height: 700px;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 2fr minmax(0, 8fr) 2fr;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 8fr) 2fr;
     column-gap: 1rem;
 }
 
 /* Hero left */
-.hero-sub {
-    background-color: grey;
+.hero-left-wrapper {
+    height: 100%;
+    box-sizing: border-box;
 }
+
+.hero-left {
+    background: gray;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+
 
 /* Hero middle */
 .hero-main {
@@ -28,27 +36,27 @@
 }
 
 .hero-main-heading {
+    font-family: serial;
     margin: 0 0 0.5rem;
     padding: 0 0;
     box-sizing: border-box;
-    border-top: 5px solid #f83403;
-    border-bottom: 2px solid #c5c5c5;
+    border-bottom: 5px solid black;
 }
 
 .hero-main-heading h1 {
     margin: 0 0;
     padding: 0 0;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 40px;
 }
 
 /* Hero middle left */
 .hero-main-left {
     display: flex;
     flex-direction: column;
-    box-shadow: 1px 1px 5px 1px #c5c5c5;
     box-sizing: border-box;
     padding: 0 0 1rem;
+    border-bottom: 2px solid black;
 }
 
 .hero-main-left-img {
@@ -63,14 +71,19 @@
 .hero-main-left-details {
     font-size: 14px;
     box-sizing: border-box;
-    padding: 0 0.8rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
 }
 
+.hero-main-left-details h2 {
+    font-family: serial;
+    font-size: 3em;
+}
+
 .hero-main-left-details p {
+    font-family: oldnewspaper;
     color: #525252;
     font-size: 1em;
 }
@@ -80,6 +93,7 @@
     justify-content: space-between;
     align-items: flex-end;
     font-size: 0.8em;
+    font-family: oldnewspaper;
     color: grey;
 }
 
@@ -97,17 +111,18 @@
 
 .hero-main-right article {
     box-sizing: border-box;
-    box-shadow: 1px 1px 5px 1px #c5c5c5;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
     padding: 0.2em;
     font-size: 12px;
+    border-bottom: 2px solid black;
 }
 
 .hero-main-right article img {
     width: 40%;
     height: 100%;
+    max-height: 150px;
     object-fit: cover;
     border-radius: 3px;
 }
@@ -122,10 +137,10 @@
 }
 
 .hero-main-right article h2 {
-    font-family: "Merriweather", serif;
+    font-family: oldnewspaper, serif;
     font-weight: 800;
     font-style: normal;
-    font-size: 1.2em;
+    font-size: 1.6em;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -137,6 +152,6 @@
 
 /* Hero Right */
 
-.hero-aside {
+.hero-right {
     background-color: black;
 }
