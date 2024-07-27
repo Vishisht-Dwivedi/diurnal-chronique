@@ -79,7 +79,7 @@ button {
     align-items: center;
     margin-top: 2rem;
     border-radius: 50px;
-    background-color: #fffefa;
+    background-color: transparent;
     border: 1px solid gray;
     padding: 0.3rem 1rem;
 }

@@ -5,6 +5,23 @@
                 <h1>BUSINESS</h1>
             </div>
             <section class="hero-left">
+                <% for (let i=0; i<=7;i++) { %>
+                    <article>
+                        <img src="<%=leftData[i].Photo%>" alt="Article Image"
+                            onerror="this.src='assets/news-placeholder.png'">
+                        <div class="article-details">
+                            <h2>
+                                <%= leftData[i].Headline %>
+                            </h2>
+                            <div class="byline">
+                                <span>
+                                    <%= leftData[i].Date %>
+                                </span>
+                                <span>-Times Of India</span>
+                            </div>
+                        </div>
+                    </article>
+                    <%}%>
             </section>
         </div>
         <!-- HERO MIDDLE -->
@@ -18,16 +35,13 @@
                         <img src="<%= data[0].Photo %>" alt="">
                     </div>
                     <div class="hero-main-left-details">
-                        <h2>
+                        <h2 id="hlfontchange">
                             <%= data[0].Headline %>
                         </h2>
-                        <p>
-                            <% if (data[0].Caption !=='' ) {%>
-                                <%= data[0].Caption %>
-                                    <%} else {%>
-                                        <%= data[0].Story.slice(0,300) + '...' %>
-                                            <%}%>
+                        <p id="main-story">
+                            <%- data[0].Story %>
                         </p>
+
 
                         <div class="byline">
                             <span>

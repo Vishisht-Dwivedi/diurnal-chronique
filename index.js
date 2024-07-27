@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const axios = require('axios');
 const path = require('path');
-const { convertXML } = require("simple-xml-to-json");
 const app = express();
 const topNewsModel = require(path.join(__dirname, '/models/topNews'));
 const businessModel = require(path.join(__dirname, '/models/business'));
@@ -144,9 +143,9 @@ async function cacheTimestampChecker(Model, cacheKey, Obj, apiURL) {
     if (currentTime - (cache[cacheKey] || 0) > 600000) {
         getDataAndUpdate(Model, Obj, apiURL);
         cache[cacheKey] = currentTime;
-        data = await Model.find({}).sort({ DateNumber: -1 }).limit(5);
+        data = await Model.find({}).sort({ DateNumber: -1 }).limit(8);
     } else {
-        data = await Model.find({}).sort({ DateNumber: -1 }).limit(5);
+        data = await Model.find({}).sort({ DateNumber: -1 }).limit(8);
     }
     return data;
 }
@@ -156,6 +155,12 @@ app.get('/', async (req, res) => {
     let data = await cacheTimestampChecker(topNewsModel, 'thlTimeStamp', TopHeadlinesObj, topHeadlinesAPI);
     let leftData = await cacheTimestampChecker(businessModel, 'businessTimeStamp', BusinessObj, businessAPI);
     parsedDate = currentDate.toLocaleDateString('us-EN', options);
+    for (let i of data) {
+        let p1 = i.Story.replace(/<([A-z]+)([^>^/]*)>\s*<\/\1>/gim, "<br>");
+        let p2 = p1.replace("</a>", "</a><br>");
+        i.Story = p2;
+        // i.Story = i.Story.replace("<p></p>", "<br>");
+    }
     res.render('index', { date: parsedDate, data: data, leftData: leftData });
 })
 
