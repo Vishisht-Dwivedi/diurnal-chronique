@@ -8,7 +8,7 @@
     margin: 1rem 0;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 8fr) 2fr;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 8fr) 1.2fr;
     column-gap: 1rem;
     grid-template-rows: minmax(0, 700px) minmax(0, 200px);
     height: 900px;
@@ -201,6 +201,42 @@
 
 /* Hero Right */
 
-.hero-right {
-    background-color: black;
+.hero-right-wrapper {
+    display: grid;
+    grid-template-rows: minmax(0, 40px) minmax(0, 2fr) 1fr;
+    row-gap: 10px;
+}
+
+.hero-right-heading {
+    font-family: serial;
+    box-sizing: border-box;
+    border-bottom: 5px solid black;
+}
+
+.hero-right-heading h1 {
+    margin: 0 0;
+    padding: 0 0;
+    font-weight: 600;
+    font-size: 40px;
+}
+
+.quote-wrapper {
+    height: 100%;
+    overflow-y: scroll;
+    border-bottom: 5px solid black;
+}
+
+.quote-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.hero-right-quotes img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.hero-right-quotes h2 {
+    margin: 0 0 1rem;
+    font-size: 1em;
+    font-family: oldnewspaper;
 }

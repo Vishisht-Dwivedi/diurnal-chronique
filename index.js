@@ -110,6 +110,9 @@ async function updateToDB(Model, Object, element) {
 //API URLS
 const topHeadlinesAPI = "https://timesofindia.indiatimes.com/feeds/newsdefaultfeeds.cms?feedtype=sjson#";
 const businessAPI = "https://timesofindia.indiatimes.com/rssfeeds/1898055.cms?feedtype=sjson";
+const quotesAPI = "https://zenquotes.io/api/quotes";
+const pexelsAPIKEY = 'TH3i6Z49qLiG3odhQuIYDIaIMJf6AKRzWCWTlg1M8pv9KcCaPLUMVxxH';
+const pexelsAPI = 'https://api.pexels.com/v1/search?query=people&color=gray&size=small&per_page=3';
 //API HANDLING
 async function getDataAndUpdate(model, Object, apiURL) {
     return axios.get(apiURL)
@@ -130,11 +133,36 @@ async function getDataAndUpdate(model, Object, apiURL) {
         });
 }
 //setting up a cache to store timestamps
-const cache = {}
+const cache = {};
+//initial call to quotes API
+axios.get(quotesAPI)
+    .then((res) => { cache['quote'] = res.data })
+    .catch((err) => console.log('error in fetching quotes', err));
+axios.get(pexelsAPI, { headers: { Authorization: pexelsAPIKEY } })
+    .then((res) => {
+        cache['quoteImg'] = res.data.photos;
+    })
+    .catch((err) => {
+        console.log('error in fetxhing img', err);
+    })
 //Calling API every 30 minutes
 setInterval(() => {
     cacheTimestampChecker(topNewsModel, 'thlTimeStamp', TopHeadlinesObj, topHeadlinesAPI);
 }, 1800000)
+//Interval of one day for reswitching quotes
+setInterval(() => {
+    axios.get(quotesAPI)
+        .then((res) => { cache['quote'] = res })
+        .catch((err) => console.log('error in fetching quotes', err));
+
+    axios.get(pexelsAPI, { Headers: { Authorization: pexelsAPIKEY } })
+        .then((res) => {
+            cache['quoteImg'] = res.data.photos;
+        })
+        .catch((err) => {
+            console.log('error in fetxhing img', err);
+        })
+}, 86400000)
 //checker function to check difference in timestamps of API calls
 async function cacheTimestampChecker(Model, cacheKey, Obj, apiURL) {
     let data;
@@ -155,13 +183,13 @@ app.get('/', async (req, res) => {
     let data = await cacheTimestampChecker(topNewsModel, 'thlTimeStamp', TopHeadlinesObj, topHeadlinesAPI);
     let leftData = await cacheTimestampChecker(businessModel, 'businessTimeStamp', BusinessObj, businessAPI);
     parsedDate = currentDate.toLocaleDateString('us-EN', options);
+    const quoteArr = cache['quote'];
     for (let i of data) {
         let p1 = i.Story.replace(/<([A-z]+)([^>^/]*)>\s*<\/\1>/gim, "<br>");
         let p2 = p1.replace("</a>", "</a><br>");
         i.Story = p2;
-        // i.Story = i.Story.replace("<p></p>", "<br>");
     }
-    res.render('index', { date: parsedDate, data: data, leftData: leftData });
+    res.render('index', { date: parsedDate, data: data, leftData: leftData, quoteArr: quoteArr, quoteImg: cache['quoteImg'] });
 })
 
 app.listen(3000, (req, res) => {

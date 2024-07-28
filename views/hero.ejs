@@ -78,7 +78,22 @@
             </section>
         </div>
 
-        <div class="hero-right"></div>
+        <div class="hero-right-wrapper">
+            <div class="hero-right-heading">
+                <h1>Quotes</h1>
+            </div>
+            <div class="quote-wrapper">
+                <% for (let i=0;i<quoteImg.length;i++) {%>
+                    <div class="hero-right-quotes">
+                        <img src="<%= quoteImg[i].src.medium %>" alt="Image displaying the qutoes">
+                        <h2>
+                            <%= quoteArr[i].q %>
+                        </h2>
+                    </div>
+                    <%}%>
+            </div>
+            <div></div>
+        </div>
     </section>
 
 </main>
