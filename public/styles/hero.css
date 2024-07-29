@@ -19,6 +19,9 @@
     height: 100%;
     box-sizing: border-box;
     border-bottom: 2px solid black;
+    display: grid;
+    grid-template-rows: minmax(0, 40px) 1fr;
+    row-gap: 10px;
 }
 
 .hero-left {
@@ -27,7 +30,7 @@
     flex-direction: column;
     overflow-y: scroll;
     scroll-behavior: smooth;
-    height: 650px;
+    height: 100%;
     position: relative;
     border-bottom: 2px solid black;
 }
@@ -70,6 +73,12 @@
 
 
 /* Hero middle */
+.hero-main-wrapper {
+    display: grid;
+    grid-template-rows: minmax(0, 40px) 1fr;
+    row-gap: 10px;
+}
+
 .hero-main {
     box-sizing: border-box;
     display: grid;
@@ -101,7 +110,7 @@
     box-sizing: border-box;
     padding: 0;
     border-bottom: 2px solid black;
-    height: 650px;
+    height: 100%;
     overflow-y: scroll;
     scroll-behavior: smooth;
     position: relative;
@@ -126,8 +135,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
-    position: relative;
 }
 
 .hero-main-left-details h2 {
@@ -139,20 +146,6 @@
     font-family: oldnewspaper;
     color: #525252;
     font-size: 1em;
-}
-
-#msd {
-    position: sticky;
-    bottom: 0;
-    height: 30px;
-    text-align: center;
-}
-
-#msu {
-    position: sticky;
-    top: 0;
-    height: 30px;
-    text-align: center;
 }
 
 .byline {
@@ -241,7 +234,7 @@
 .quote-wrapper {
     height: 100%;
     overflow-y: scroll;
-    border-bottom: 5px solid black;
+    border-bottom: 2px solid black;
     position: relative;
     scroll-behavior: smooth;
 }
@@ -293,7 +286,7 @@
     position: sticky;
     width: 100%;
     top: 0;
-    background-image: linear-gradient(to Top, rgba(255, 254, 250, 0.8), rgba(255, 254, 250, 1), rgba(255, 254, 250, 1));
+    background-image: linear-gradient(to Top, rgba(255, 254, 250, 0.8), rgba(255, 254, 250, 1), rgb(255, 254, 250));
     text-align: center;
 }
 
@@ -315,4 +308,18 @@
     padding: 5px 0 0;
     width: 100%;
     text-align: center;
+}
+
+.coffee img {
+    width: 110%;
+    height: 150%;
+    border: none;
+}
+
+.coffee {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
 }
