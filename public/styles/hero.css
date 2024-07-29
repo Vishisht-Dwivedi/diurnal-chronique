@@ -28,6 +28,8 @@
     overflow-y: scroll;
     scroll-behavior: smooth;
     height: 650px;
+    position: relative;
+    border-bottom: 2px solid black;
 }
 
 .hero-left::-webkit-scrollbar {
@@ -46,8 +48,8 @@
     border-bottom: 2px solid black;
 }
 
-.hero-left article:last-child {
-    border-bottom: none;
+.hero-left article:last-of-type {
+    border-bottom: 0;
     margin-bottom: 0;
 }
 
@@ -97,11 +99,12 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding: 0 0 1rem;
+    padding: 0;
     border-bottom: 2px solid black;
-    height: 100%;
+    height: 650px;
     overflow-y: scroll;
-    text-overflow: clip;
+    scroll-behavior: smooth;
+    position: relative;
 }
 
 .hero-main-left::-webkit-scrollbar {
@@ -124,6 +127,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    position: relative;
 }
 
 .hero-main-left-details h2 {
@@ -135,6 +139,20 @@
     font-family: oldnewspaper;
     color: #525252;
     font-size: 1em;
+}
+
+#msd {
+    position: sticky;
+    bottom: 0;
+    height: 30px;
+    text-align: center;
+}
+
+#msu {
+    position: sticky;
+    top: 0;
+    height: 30px;
+    text-align: center;
 }
 
 .byline {
@@ -224,6 +242,8 @@
     height: 100%;
     overflow-y: scroll;
     border-bottom: 5px solid black;
+    position: relative;
+    scroll-behavior: smooth;
 }
 
 .quote-wrapper::-webkit-scrollbar {
@@ -239,4 +259,60 @@
     margin: 0 0 1rem;
     font-size: 1em;
     font-family: oldnewspaper;
+}
+
+.sd {
+    position: sticky;
+    width: 100%;
+    bottom: 0;
+    background-image: linear-gradient(rgba(255, 254, 250, 0.8), rgba(255, 254, 250, 1), rgba(255, 254, 250, 1));
+    text-align: center;
+}
+
+.sd img {
+    width: 100%;
+    height: 20px;
+    border: none;
+}
+
+.sd button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    padding: 5px 0 0;
+    width: 100%;
+    text-align: center;
+}
+
+.su {
+    display: none;
+    position: sticky;
+    width: 100%;
+    top: 0;
+    background-image: linear-gradient(to Top, rgba(255, 254, 250, 0.8), rgba(255, 254, 250, 1), rgba(255, 254, 250, 1));
+    text-align: center;
+}
+
+.su img {
+    width: 100%;
+    height: 20px;
+    border: none;
+    transform: rotate(180deg);
+}
+
+.su button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    padding: 5px 0 0;
+    width: 100%;
+    text-align: center;
 }
