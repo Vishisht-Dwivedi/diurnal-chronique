@@ -108,11 +108,7 @@ async function updateToDB(Model, Object, element) {
 
 }
 //API URLS
-const topHeadlinesAPI = "https://timesofindia.indiatimes.com/feeds/newsdefaultfeeds.cms?feedtype=sjson#";
-const businessAPI = "https://timesofindia.indiatimes.com/rssfeeds/1898055.cms?feedtype=sjson";
-const quotesAPI = "https://zenquotes.io/api/quotes";
-const pexelsAPIKEY = 'TH3i6Z49qLiG3odhQuIYDIaIMJf6AKRzWCWTlg1M8pv9KcCaPLUMVxxH';
-const pexelsAPI = 'https://api.pexels.com/v1/search?query=people&color=gray&size=small&per_page=3';
+
 //API HANDLING
 async function getDataAndUpdate(model, Object, apiURL) {
     return axios.get(apiURL)
