@@ -113,6 +113,7 @@ const businessAPI = "https://timesofindia.indiatimes.com/rssfeeds/1898055.cms?fe
 const quotesAPI = "https://zenquotes.io/api/quotes";
 const pexelsAPIKEY = 'TH3i6Z49qLiG3odhQuIYDIaIMJf6AKRzWCWTlg1M8pv9KcCaPLUMVxxH';
 const pexelsAPI = 'https://api.pexels.com/v1/search?query=people&color=gray&size=small&per_page=3';
+const artAPI = 'https://api.artic.edu/api/v1/artworks/';
 //API HANDLING
 async function getDataAndUpdate(model, Object, apiURL) {
     return axios.get(apiURL)
@@ -134,41 +135,32 @@ async function getDataAndUpdate(model, Object, apiURL) {
 }
 //setting up a cache to store timestamps
 const cache = {};
-//initial call to quotes API
-axios.get(quotesAPI)
-    .then((res) => { cache['quote'] = res.data })
-    .catch((err) => console.log('error in fetching quotes', err));
-axios.get(pexelsAPI, { headers: { Authorization: pexelsAPIKEY } })
-    .then((res) => {
-        cache['quoteImg'] = res.data.photos;
-    })
-    .catch((err) => {
-        console.log('error in fetxhing img', err);
-    })
+cache['quote'] = {};
+cache['quoteImg'] = {};
+async function getDataNoDB(ApiURL, cacheKey, ApiHeaders) {
+    let currentTime = Date.now();
+    let res;
+    try {
+        if (currentTime - (cache[cacheKey].timestamp || 0) > 86400000) {
+            res = await axios.get(ApiURL, ApiHeaders);
+            cache[cacheKey].data = res.data;
+            cache[cacheKey].timestamp = Date.now();
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
 //Calling API every 30 minutes
 setInterval(() => {
     cacheTimestampChecker(topNewsModel, 'thlTimeStamp', TopHeadlinesObj, topHeadlinesAPI);
 }, 1800000)
-//Interval of one day for reswitching quotes
-setInterval(() => {
-    axios.get(quotesAPI)
-        .then((res) => { cache['quote'] = res })
-        .catch((err) => console.log('error in fetching quotes', err));
 
-    axios.get(pexelsAPI, { Headers: { Authorization: pexelsAPIKEY } })
-        .then((res) => {
-            cache['quoteImg'] = res.data.photos;
-        })
-        .catch((err) => {
-            console.log('error in fetxhing img', err);
-        })
-}, 86400000)
 //checker function to check difference in timestamps of API calls
-async function cacheTimestampChecker(Model, cacheKey, Obj, apiURL) {
+async function cacheTimestampChecker(Model, cacheKey, Obj, apiURL, cacheTime) {
     let data;
     //checking to see if objects in database aren't older than 10 minutes from current time, if they are call api getter again
     let currentTime = Date.now();
-    if (currentTime - (cache[cacheKey] || 0) > 600000) {
+    if (currentTime - (cache[cacheKey] || 0) > cacheTime) {
         getDataAndUpdate(Model, Obj, apiURL);
         cache[cacheKey] = currentTime;
         data = await Model.find({}).sort({ DateNumber: -1 }).limit(8);
@@ -180,16 +172,17 @@ async function cacheTimestampChecker(Model, cacheKey, Obj, apiURL) {
 
 //routes
 app.get('/', async (req, res) => {
-    let data = await cacheTimestampChecker(topNewsModel, 'thlTimeStamp', TopHeadlinesObj, topHeadlinesAPI);
-    let leftData = await cacheTimestampChecker(businessModel, 'businessTimeStamp', BusinessObj, businessAPI);
+    let data = await cacheTimestampChecker(topNewsModel, 'thlTimeStamp', TopHeadlinesObj, topHeadlinesAPI, 600000);
+    let leftData = await cacheTimestampChecker(businessModel, 'businessTimeStamp', BusinessObj, businessAPI, 600000);
     parsedDate = currentDate.toLocaleDateString('us-EN', options);
-    const quoteArr = cache['quote'];
+    await getDataNoDB(pexelsAPI, 'quoteImg', { headers: { Authorization: pexelsAPIKEY } });
+    await getDataNoDB(quotesAPI, 'quote');
     for (let i of data) {
         let p1 = i.Story.replace(/<([A-z]+)([^>^/]*)>\s*<\/\1>/gim, "<br>");
         let p2 = p1.replace("</a>", "</a><br>");
         i.Story = p2;
     }
-    res.render('index', { date: parsedDate, data: data, leftData: leftData, quoteArr: quoteArr, quoteImg: cache['quoteImg'] });
+    res.render('index', { date: parsedDate, data: data, leftData: leftData, quoteArr: cache['quote'].data, quoteImg: cache['quoteImg'].data.photos });
 })
 
 app.listen(3000, (req, res) => {

@@ -1,0 +1,18 @@
+.art-gallery {
+    display: grid;
+    grid-template-rows: minmax(0, 40px) minmax(0, 650px);
+    row-gap: 10px;
+}
+
+.art-gallery h2 {
+    border-bottom: 5px solid black;
+    font-size: 40px;
+    font-family: serial;
+    height: 40px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) 1fr;
+    column-gap: 10px;
+}
