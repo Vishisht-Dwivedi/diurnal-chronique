@@ -1,18 +1,76 @@
 .art-gallery {
     display: grid;
-    grid-template-rows: minmax(0, 40px) minmax(0, 650px);
+    grid-template-rows: minmax(0, 40px) 1fr;
     row-gap: 10px;
+    margin-top: 4rem;
+    max-height: 650px;
+    box-sizing: border-box;
+    font-size: 40px;
 }
 
-.art-gallery h2 {
-    border-bottom: 5px solid black;
-    font-size: 40px;
+.art-heading {
     font-family: serial;
-    height: 40px;
+    padding: 0 0;
+    box-sizing: border-box;
+    border-bottom: 5px solid black;
+}
+
+.art-heading h2 {
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+.art-piece {
+    height: 600px;
+    box-sizing: border-box;
+    margin-right: 3rem;
+}
+
+.art-piece img {
+    border: 10px solid black;
+    height: 100%;
+    object-fit: contain;
+    box-sizing: border-box;
 }
 
 .gallery {
-    display: grid;
-    grid-template-columns: minmax(0, 3fr) 1fr;
-    column-gap: 10px;
+    display: flex;
+    max-height: 600px;
+    box-sizing: border-box;
+}
+
+.art-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.art-details h1 {
+    font-family: serial;
+    font-size: 1.1em;
+    margin: 0.8rem 0;
+    text-transform: uppercase;
+}
+
+.art-details .description {
+    font-family: oldnewspaper;
+    font-size: 0.5em;
+}
+
+.art-details .description p {
+    margin: 0.5rem 0 0;
+}
+
+.art-details .provenance {
+    font-family: oldnewspaper;
+    font-size: 0.35em;
+}
+
+.art-details .provenance p {
+    margin: 0.5rem 0 0;
+}
+
+.artist-display {
+    text-align: end;
 }

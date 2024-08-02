@@ -12,15 +12,15 @@
                 </div>
                 <% for (let i=0; i<=7;i++) { %>
                     <article>
-                        <img src="<%=leftData[i].Photo%>" alt="Article Image"
+                        <img src="<%=heroData.leftData[i].Photo%>" alt="Article Image"
                             onerror="this.src='assets/news-placeholder.png'">
                         <div class="article-details">
                             <h2>
-                                <%= leftData[i].Headline %>
+                                <%= heroData.leftData[i].Headline %>
                             </h2>
                             <div class="byline">
                                 <span>
-                                    <%= leftData[i].Date %>
+                                    <%= heroData.leftData[i].Date %>
                                 </span>
                                 <span>-Times Of India</span>
                             </div>
@@ -47,23 +47,23 @@
                         </button>
                     </div>
                     <div class="hero-main-left-img">
-                        <img src="<%= data[0].Photo %>" alt="">
+                        <img src="<%= heroData.heroMainData[0].Photo %>" alt="">
                     </div>
                     <div class="hero-main-left-details">
                         <h2 id="hlfontchange">
-                            <%= data[0].Headline %>
+                            <%= heroData.heroMainData[0].Headline %>
                         </h2>
                         <p id="main-story">
-                            <%- data[0].Story %>
+                            <%- heroData.heroMainData[0].Story %>
                         </p>
 
 
                         <div class="byline">
                             <span>
-                                <%= data[0].Date %>
+                                <%= heroData.heroMainData[0].Date %>
                             </span>
                             <span>
-                                -<%= data[0].ByLine %>
+                                -<%= heroData.heroMainData[0].ByLine %>
                             </span>
                         </div>
                     </div>
@@ -77,18 +77,18 @@
                 <div class="hero-main-right">
                     <% for (let i=1; i<=4;i++) { %>
                         <article>
-                            <img src="<%= data[i].Photo %>" alt="article-img"
+                            <img src="<%= heroData.heroMainData[i].Photo %>" alt="article-img"
                                 onerror="this.src='assets/news-placeholder.png'">
                             <div class="article-details">
                                 <h2>
-                                    <%= data[i].Headline %>
+                                    <%= heroData.heroMainData[i].Headline %>
                                 </h2>
                                 <div class="byline">
                                     <span>
-                                        <%= data[i].Date %>
+                                        <%= heroData.heroMainData[i].Date %>
                                     </span>
                                     <span>
-                                        -<%= data[i].ByLine %>
+                                        -<%= heroData.heroMainData[i].ByLine %>
                                     </span>
                                 </div>
                             </div>
@@ -109,11 +109,11 @@
                         <img src="assets/down-arrow.svg" alt="">
                     </button>
                 </div>
-                <% for (let i=0;i<quoteImg.length;i++) {%>
+                <% for (let i=0;i<heroData.quoteImg.length;i++) {%>
                     <div class="hero-right-quotes">
-                        <img src="<%= quoteImg[i].src.medium %>" alt="Image displaying the qutoes">
+                        <img src="<%= heroData.quoteImg[i].src.medium %>" alt="Image displaying the qutoes">
                         <h2>
-                            <%= quoteArr[i].q %>
+                            <%= heroData.quoteArr[i].q %>
                         </h2>
                     </div>
                     <%}%>

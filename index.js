@@ -6,6 +6,7 @@ const path = require('path');
 const app = express();
 const topNewsModel = require(path.join(__dirname, '/models/topNews'));
 const businessModel = require(path.join(__dirname, '/models/business'));
+const artModel = require(path.join(__dirname, "/models/art"));
 //using and setting paths
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, '/views'));
@@ -92,18 +93,47 @@ class BusinessObj {
         this.DateNumber = Date.parse(element.pubDate);
     }
 }
+class ArtObj {
+    constructor(element) {
+        this.title = element.title;
+        this.image_Id = element.image_id;
+        this.artist_display = element.artist_display;
+        this.description = element.description;
+        this.provenance_text = element.provenance_text;
+        this.artist = { name: element.artist_title, artist_id: element.artist_id };
+        this.keywords = element.term_titles.concat(element.subject_titles, element.technique_titles)
+        this.IIIFBase = IIIFBase;
+    }
+}
 //updating function that takes in the model to put data in, the constructor objects and the element which needs to be passed into the constructor functions.
 async function updateToDB(Model, Object, element) {
     const options = { upsert: true, new: true }
-    const obj = new Object(element);
-    if (!element.NewsItemId) {
+
+    if (Model === businessModel) {
+        const obj = new Object(element);
         Model.findOneAndUpdate({ _id: Number(element.link.slice(-13, -4)) }, obj, options)
             .then(() => { return })
-            .catch((err) => console.log('Error in updating elements->', err));
-    } else {
+            .catch((err) => console.log('Error in updating business elements->', err));
+    } else if (Model === topNewsModel) {
+        const obj = new Object(element);
         Model.findOneAndUpdate({ _id: Number(element.NewsItemId) }, obj, options)
             .then(() => { return })
-            .catch((err) => console.log('Error in updating elements->', err));
+            .catch((err) => console.log('Error in updating headline elements->', err));
+    } else if (Model === artModel) {
+        await axios.get(element.api_link)
+            .then((response) => {
+                const e = response.data.data;
+                const obj = new Object(e);
+                if (e.description && e.artist_display && e.provenance_text) {
+                    Model.findOneAndUpdate({ _id: e.id }, obj, options)
+                        .then(() => { return })
+                        .catch((err) => console.log('Error in updating art element->', err));
+                }
+            })
+            .catch((err) => {
+                console.log("error in updating art API->", err)
+            })
+
     }
 
 }
@@ -113,7 +143,8 @@ const businessAPI = "https://timesofindia.indiatimes.com/rssfeeds/1898055.cms?fe
 const quotesAPI = "https://zenquotes.io/api/quotes";
 const pexelsAPIKEY = 'TH3i6Z49qLiG3odhQuIYDIaIMJf6AKRzWCWTlg1M8pv9KcCaPLUMVxxH';
 const pexelsAPI = 'https://api.pexels.com/v1/search?query=people&color=gray&size=small&per_page=3';
-const artAPI = 'https://api.artic.edu/api/v1/artworks/';
+const artAPI = 'https://api.artic.edu/api/v1/artworks/search?q=paintings,romance,love,war,rome,greece,constantinople,historic&limit=100';
+let IIIFBase;
 //API HANDLING
 async function getDataAndUpdate(model, Object, apiURL) {
     return axios.get(apiURL)
@@ -123,6 +154,9 @@ async function getDataAndUpdate(model, Object, apiURL) {
                 newsArr = response.data.NewsItem;
             } else if (apiURL === businessAPI) {
                 newsArr = response.data.channel.item;
+            } else if (apiURL === artAPI) {
+                IIIFBase = response.data.config.iiif_url;
+                newsArr = response.data.data;
             }
             for (let element of newsArr) {
                 updateToDB(model, Object, element);
@@ -137,6 +171,9 @@ async function getDataAndUpdate(model, Object, apiURL) {
 const cache = {};
 cache['quote'] = {};
 cache['quoteImg'] = {};
+cache['businessTimeStamp'];
+cache['artTimeStamp'];
+cache['thlTimeStamp'];
 async function getDataNoDB(ApiURL, cacheKey, ApiHeaders) {
     let currentTime = Date.now();
     let res;
@@ -161,11 +198,20 @@ async function cacheTimestampChecker(Model, cacheKey, Obj, apiURL, cacheTime) {
     //checking to see if objects in database aren't older than 10 minutes from current time, if they are call api getter again
     let currentTime = Date.now();
     if (currentTime - (cache[cacheKey] || 0) > cacheTime) {
-        getDataAndUpdate(Model, Obj, apiURL);
+        await getDataAndUpdate(Model, Obj, apiURL);
         cache[cacheKey] = currentTime;
-        data = await Model.find({}).sort({ DateNumber: -1 }).limit(8);
+        if (Model !== artModel) {
+            data = await Model.find({}).sort({ DateNumber: -1 }).limit(8);
+        } else {
+            data = await Model.aggregate([{ $sample: { size: 1 } }]);
+        }
     } else {
-        data = await Model.find({}).sort({ DateNumber: -1 }).limit(8);
+        if (Model !== artModel) {
+            data = await Model.find({}).sort({ DateNumber: -1 }).limit(8);
+        } else {
+            data = await Model.aggregate([{ $sample: { size: 1 } }]);
+        }
+
     }
     return data;
 }
@@ -174,6 +220,8 @@ async function cacheTimestampChecker(Model, cacheKey, Obj, apiURL, cacheTime) {
 app.get('/', async (req, res) => {
     let data = await cacheTimestampChecker(topNewsModel, 'thlTimeStamp', TopHeadlinesObj, topHeadlinesAPI, 600000);
     let leftData = await cacheTimestampChecker(businessModel, 'businessTimeStamp', BusinessObj, businessAPI, 600000);
+    let artData = await cacheTimestampChecker(artModel, 'artTimeStamp', ArtObj, artAPI, 86400000);
+
     parsedDate = currentDate.toLocaleDateString('us-EN', options);
     await getDataNoDB(pexelsAPI, 'quoteImg', { headers: { Authorization: pexelsAPIKEY } });
     await getDataNoDB(quotesAPI, 'quote');
@@ -182,7 +230,13 @@ app.get('/', async (req, res) => {
         let p2 = p1.replace("</a>", "</a><br>");
         i.Story = p2;
     }
-    res.render('index', { date: parsedDate, data: data, leftData: leftData, quoteArr: cache['quote'].data, quoteImg: cache['quoteImg'].data.photos });
+    const heroData = {
+        heroMainData: data,
+        leftData: leftData,
+        quoteArr: cache['quote'].data,
+        quoteImg: cache['quoteImg'].data.photos
+    }
+    res.render('index', { date: parsedDate, heroData, artData: artData });
 })
 
 app.listen(3000, (req, res) => {
