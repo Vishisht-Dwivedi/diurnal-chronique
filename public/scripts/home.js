@@ -16,7 +16,7 @@ document.querySelector('#hlfontchange').innerHTML = changedText.join('');
 const scrollDown = document.querySelectorAll('.sd');
 scrollDown.forEach(element => {
     element.addEventListener('click', () => {
-        element.parentElement.scrollBy(0, 200);
+        element.parentElement.scrollBy(0, 100);
     })
 });
 const scrollUp = document.querySelectorAll('.su');
@@ -25,22 +25,36 @@ scrollUp.forEach(element => {
         element.parentElement.scrollBy(0, -200);
     })
 });
-const heroLeft = document.querySelectorAll('.scrollable');
+const scrollDivs = document.querySelectorAll('.scrollable');
 
-heroLeft.forEach(element => {
+scrollDivs.forEach(element => {
     element.addEventListener('scroll', () => {
         const su = element.querySelector('.su');
         const sd = element.querySelector('.sd');
         const div = element;
-        if (div.scrollTop > 50) {
+        console.log(div.scrollHeight-(div.clientHeight+div.scrollTop));
+        if (div.scrollTop > 0) {
             su.style.display = 'block';
-            if ((div.scrollTop - (div.scrollHeight - div.offsetHeight)) > 0) {
+            if (((div.scrollHeight-(div.clientHeight+div.scrollTop)) <=15)) {
                 sd.style.display = 'none';
             } else {
                 sd.style.display = 'block';
             }
         } else if (div.scrollTop === 0) {
             su.style.display = 'none';
-        }
+        } 
     })
 }); 
+//On load events
+window.addEventListener("load",()=>{
+    const artPiece = document.querySelector(".art-piece img");
+    const artDetails = document.querySelector(".art-details");
+    artDetails.style.height = (artPiece.offsetHeight+20)+"px";
+
+    scrollDivs.forEach(element=>{
+        const sd = element.children[element.children.length-1];
+        if(element.offsetHeight >= element.scrollHeight){
+            sd.style.display = 'none';
+        }
+    });
+})
