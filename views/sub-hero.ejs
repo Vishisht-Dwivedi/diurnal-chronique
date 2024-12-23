@@ -1,16 +1,20 @@
 <section class="sub-hero">
     <div class="sub-hero-main">
-        <div class="shm-l">
-            <img src="<%= heroData.heroMainData[5].Photo %>" alt="">
-            <h2>
-                <%= heroData.heroMainData[5].Headline %>
-            </h2>
-            <p>
-                <%= heroData.heroMainData[5].Story %>
-            </p>
-        </div>
+        <img src="<%= heroData.heroMainData[5].Photo %>" alt="">
+        <h2>
+            <%- heroData.heroMainData[5].Headline %>
+        </h2>
+        <p>
+            <%- heroData.heroMainData[5].Story.slice(0,750)+"..." %>
+        </p>
+        <a href="<%=heroData.heroMainData[5].WebURL %>">Read More</a>
     </div>
     <div class="sub-hero-right">
-
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
 </section>
