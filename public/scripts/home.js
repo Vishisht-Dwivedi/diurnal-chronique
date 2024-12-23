@@ -57,4 +57,4 @@ window.addEventListener("load",()=>{
             sd.style.display = 'none';
         }
     });
-})
+});

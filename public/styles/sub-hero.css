@@ -1,0 +1,29 @@
+.sub-hero{
+    height: 350px;
+    display: grid;
+    grid-template-columns: 45% 55%;
+    overflow:hidden;
+}
+.shm-l{
+    width:50%;
+}
+.shm-l img {
+    width:100%;
+    box-sizing: border-box;
+    border:5px solid black;
+}
+
+.shm-l h2{
+    font-family: oldnewspaper, serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 1.4em;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    border-bottom: 4px solid black;
+}

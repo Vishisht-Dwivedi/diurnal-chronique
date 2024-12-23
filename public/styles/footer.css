@@ -1,0 +1,27 @@
+footer {
+    height: 300px;
+    margin: 1rem 0;
+    padding: 0;
+    border-top: 10px solid black;
+}
+.footer-heading {
+    font-family: "oldnewspaper";
+}
+.footer-heading h1 {
+    margin-top: 0.3rem;
+    font-size: 1.6em;
+    font-weight: 800;
+    border-bottom: 5px solid black;
+}
+.footer-body{
+    color:white;
+    background-color: black;
+    height:100%;
+    padding:0.5rem 1rem;
+}
+.footer-body h2 {
+    font-family: "oldnewspaper";
+    font-size: 1.6em;
+    font-weight: 400;
+    margin:0;
+}
