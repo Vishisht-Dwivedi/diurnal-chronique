@@ -1,7 +1,23 @@
-.sub-hero{
-    height: 400px;
+.sub-headings {
+    font-family: serial;
+    margin: 30px 0 10px;
+    padding: 0 0;
+    box-sizing: border-box;
+    height: 40px;
     display: grid;
-    grid-template-columns: 45% 55%;
+    grid-template-columns: 80% 20%;
+}
+.sub-headings h1 {
+    margin: 0 10px 0;
+    padding: 0 0;
+    font-weight: 600;
+    font-size: 40px;
+    border-bottom: 5px solid black;
+}
+.sub-hero{
+    height: 450px;
+    display: grid;
+    grid-template-columns: 40% 60%;
     overflow : hidden;
     text-overflow: clip;
     widows: 3;
@@ -10,7 +26,7 @@
     column-count: 2;
     column-rule: 2px solid black;
     box-sizing: border-box;
-    border-right: 5px solid black;
+    border-right: 2px solid black;
     padding-right: 10px;
 }
 .sub-hero-main img {
@@ -19,7 +35,7 @@
     border:5px solid black;
 }
 
-.sub-hero-main h2{
+.sub-hero h2{
     font-family: oldnewspaper, serif;
     font-weight: 800;
     font-style: normal;
@@ -33,13 +49,13 @@
     -webkit-box-orient: vertical;
     border-bottom: 4px solid black;
 }
-.sub-hero-main p{
+.sub-hero p{
     margin-top: 0.7em;
     font-family: oldnewspaper;
     color: #525252;
     font-size: 1em;
 }
-.sub-hero-main a{
+.sub-hero a{
     display: block;
     position: sticky;
     bottom: 0;
@@ -55,13 +71,34 @@
 }
 /* right side */
 .sub-hero-right{
+    font-size: 14px;
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     gap: 5px;
-    margin-left: 5px;
+    padding-left: 2px;
+    box-sizing: border-box;
+    border-left: 2px solid black;
+}
+.shr-articles {
+    box-sizing: border-box;
+    border:2px solid black;
+    padding: 5px;
+}
+.shr-articles img {
+    width:100%;
+    border: 5px solid black;
     box-sizing: border-box;
 }
-.sub-hero-right div{
-    background-color: black;
+.archives {
+    height:100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+.archives div {
+    text-align: center;
+    align-content: center;
+    font-family: oldnewspaper;
+    color: #525252;
+    font-size: 1.3em;
+    text-decoration: underline;
 }
