@@ -28,7 +28,7 @@
                 <%- heroData.heroMainData[6].Headline %>
             </h2>
             <p>
-                <%- heroData.heroMainData[6].Story.slice(0,250)+"..." %>
+                <%- heroData.heroMainData[6].Story.slice(0,250).replace(/<\/?[^>]+(>|$)/g, "")+"..." %>
             </p>
             <a href="<%=heroData.heroMainData[6].WebURL %>">Read More</a>
         </div>
@@ -38,7 +38,7 @@
                 <%- heroData.heroMainData[7].Headline %>
             </h2>
             <p>
-                <%- heroData.heroMainData[7].Story.slice(0,250)+"..." %>
+                <%- heroData.heroMainData[7].Story.slice(0,250).replace(/<\/?[^>]+(>|$)/g, "")+"..." %>
             </p>
             <a href="<%=heroData.heroMainData[7].WebURL %>">Read More</a>
         </div>

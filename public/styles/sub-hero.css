@@ -28,6 +28,7 @@
     box-sizing: border-box;
     border-right: 2px solid black;
     padding-right: 10px;
+    max-height: 450px;
 }
 .sub-hero-main img {
     width:100%;
@@ -78,11 +79,13 @@
     padding-left: 2px;
     box-sizing: border-box;
     border-left: 2px solid black;
+    max-height: 450px;
 }
 .shr-articles {
     box-sizing: border-box;
     border:2px solid black;
     padding: 5px;
+    max-height: 450px;
 }
 .shr-articles img {
     width:100%;
