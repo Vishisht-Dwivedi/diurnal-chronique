@@ -1,4 +1,5 @@
 # diurnal-chronique
+This is a republish of this same repo.. which had some compromised APIs.
 Final Layout(non responsive)
 ![Web capture_12-1-2025_214628_localhost](https://github.com/user-attachments/assets/e5d7b02a-a854-4d06-bb6f-a32817a88ac0)
 Video Demo
