@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diurnal Chronique</title>
+    <link rel="shortcut icon" href="assets/git-profile.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles/header-styles.css">
+    <link rel="stylesheet" href="styles/hero.css">
+    <link rel="stylesheet" href="styles/business.css">
+    <link rel="stylesheet" href="styles/art-gallery.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/sub-hero.css">
+    <!-- Content Font -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'wolfred';
+            src: url('fonts/wolfred.woff2') format('woff2'),
+                url('fonts/wolfred.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+
+        @font-face {
+            font-family: 'serial';
+            src: url('fonts/serialpublicationdemo-qxo1-webfont.woff2') format('woff2'),
+                url('fonts/serialpublicationdemo-qxo1-webfont.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'oldnewspaper';
+            src: url('fonts/oldnewspapertypes-webfont.woff2') format('woff2'),
+                url('fonts/oldnewspapertypes-webfont.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            background-image: url('assets/background.png');
+            background-repeat: repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="page-header">
+        <!-- top -->
+        <div class="header-abt-day">
+            <div class="date">
+                <%= date %>
+            </div>
+            <div class="weather-forecast">
+                Weather Stuff
+            </div>
+        </div>
+        <!-- header hero -->
+        <div class="header-main">
+            <div class="header-main-support">
+                <p class="header-support-cta">Support Our Work</p>
+                <summary>Fearless, Independant and Reader-funded</summary>
+                <button>Support Us <img src="assets/arrow-right-up.svg" style="width:20px" alt="arrow"></button>
+            </div>
+            <div class="header-logo">
+                <img src="assets/logo.svg" alt="Diurnal Chronique">
+            </div>
+            <div class="header-signup">
+                <div>
+                    <div>
+                        <p class="header-support-cta">Sign Up for our newsletter</p>
+                        <summary>To stay one step ahead of the world</summary>
+                    </div>
+                    <button type="button" class="header-signup-btn">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav class="main-nav">
+        <div class="nav-collapse">
+            <img src="assets/three-nav.svg" style="width:20px" alt="menu">
+            <p>More Sections</p>
+        </div>
+        <div></div>
+        <div class="nav-links">
+            <a href="">Top Stories</a>
+            <a href="">India</a>
+            <a href="">World</a>
+            <a href="">Tech</a>
+            <a href="">Sports</a>
+            <a href="">City-wise</a>
+        </div>
+        <div></div>
+        <div class="nav-search">
+        </div>
+
+    </nav>

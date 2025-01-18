@@ -1,0 +1,41 @@
+<section class="art-gallery">
+    <div class="art-heading">
+        <h2>ART GALLERY</h2>
+    </div>
+
+    <div class="gallery">
+        <div class="art-piece">
+            <img src="<%= `${artData[0].IIIFBase}/${artData[0].image_Id}/full/843,/0/default.jpg` %>" alt="">
+        </div>
+        <div class="art-details scrollable">
+            <div class="su">
+                <button style="background-image: url(assets/background.png);">
+                    <img src="assets/down-arrow.svg" alt="">
+                </button>
+            </div>
+            <div>
+                <h1>
+                    <%= artData[0].title %>
+                </h1>
+                <div class="description">
+                    <em>Description</em>
+                    <%- artData[0].description %>
+                </div>
+            </div>
+
+            <div class="provenance">
+                <em>Provenance</em>
+                <p><%- artData[0].provenance_text %></p>
+                <div class="artist-display">
+                    ~<%- artData[0].artist_display %>
+                </div>
+            </div>
+            <div class="sd">
+                <button style="background-image: url(assets/background.png);">
+                    <img src="assets/down-arrow.svg" alt="">
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>

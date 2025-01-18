@@ -1,0 +1,49 @@
+<section class="finance">
+    <div class="chart">
+        <h2>Finance</h2>
+        <form action="/chartData/searchbox" method="get" class="stock-form" id="chart-form">
+            <label for="market-autocomplete">Market: </label>
+            <input list="marketNames" id="market-autocomplete" class="finance-chart-input" name="markets"
+                placeholder="cadli">
+            <datalist id="marketNames">
+                <option value="cadli">cadli</option>
+                <option value="ccix">ccix</option>
+                <option value="ccxrp">ccxrp</option>
+                <option value="ccxrpperp">ccxrpperp</option>
+                <option value="cd_mc">cd_mc</option>
+            </datalist>
+            <label for="stock-autocomplete">Instrument: </label>
+            <input list="instrumentNames" id="stock-autocomplete" class="finance-chart-input" name="instruments"
+                placeholder="BTC-USD">
+            <datalist id="instrumentNames">
+            </datalist>
+            <button><img src="assets/search.svg" alt="Search"></button>
+        </form>
+        <div id="stock-chart"></div>
+    </div>
+    <div class="finance-news">
+        <h2>Finance News</h2>
+        <div class="finance-news-wrapper">
+            <% for(let i=0;i<6;i++){ %>
+                <article>
+                    <img src="<%= businessData[i].Photo %>" alt="Photo">
+                    <h3>
+                        <%- businessData[i].Headline %>
+                    </h3>
+                    <div class="finance-article-footer">
+                        <span>Times of India</span>
+                        <span>
+                            <% const date=new Date(businessData[i].Date);const
+                                formattedDate=date.toLocaleDateString('en-GB',{ day: '2-digit' , month: 'short' ,
+                                year: 'numeric' }).replace(/\//g, '-' ); %>
+                                <%- formattedDate %>
+                        </span>
+                    </div>
+
+                </article>
+                <% } %>
+        </div>
+    </div>
+</section>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="scripts/business.js"></script>

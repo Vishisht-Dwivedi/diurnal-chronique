@@ -1,0 +1,89 @@
+footer {
+    height: 250px;
+    margin: 1rem 0;
+    padding: 0;
+    border-top: 10px solid black;
+}
+.footer-heading {
+    font-family: "oldnewspaper";
+}
+.footer-heading h1 {
+    margin-top: 0.3rem;
+    font-size: 1.6em;
+    font-weight: 800;
+    border-bottom: 5px solid black;
+}
+.footer-body{
+    margin-top: 0;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1.25fr 2.75fr;
+    box-sizing: border-box;
+    color: black;
+}
+.footer-left{
+    height: 100%;
+    padding: 50px;
+    text-align: center;
+    box-sizing: border-box;
+}
+.footer-left img{
+    width: 100%;
+}
+.footer-left h3{
+    margin: 0;
+    font-family: oldnewspaper;
+    font-weight: 100;
+    font-size: 1em;
+    box-sizing: border-box;
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+}
+.footer-icons{
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.footer-icons img {
+    height: 50px;
+    width: 50px;
+}
+.footer-icons a{    
+    flex-grow: 2;
+    flex-shrink: 2;
+}
+.footer-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.footer-right h2 {
+    font-family: serial;
+    margin: 0 0 10px;
+    padding: 0 0;
+    box-sizing: border-box;
+    border-bottom: 5px solid black;
+    height: 40px;
+    font-size: 2em;
+    text-align: center;
+}
+.footer-right p {
+    font-family: oldnewspaper;
+    color: #525252;
+    font-size: 1em;
+    text-align: center;
+}
+.footer-right li {
+    list-style-type:none;
+    font-family: oldnewspaper;
+    color: #525252;
+    font-size: 0.9em;
+    text-align: center;
+}
+.footer-bottom {
+    font-family: oldnewspaper;
+    color: #525252;
+    font-size: 1.2em;
+    text-align: center;
+    width: 100%;
+}

@@ -1,0 +1,63 @@
+<section class="sub-headings">
+    <div>
+        <h1>
+            Older Articles
+        </h1>
+    </div>
+    <div>
+        <h1>
+            Archives
+        </h1>
+    </div>
+</section>
+<section class="sub-hero">
+    <div class="sub-hero-main">
+        <img src="<%= heroData.heroMainData[5].Photo %>" alt="">
+        <h2>
+            <%- heroData.heroMainData[5].Headline %>
+        </h2>
+        <p>
+            <%= heroData.heroMainData[5].Story.slice(0,720).replace(/<\/?[^>]+(>|$)/g, "")+"..." %>
+        </p>
+        <a href="<%=heroData.heroMainData[5].WebURL %>">Read More</a>
+    </div>
+    <div class="sub-hero-right">
+        <div class="shr-articles">
+            <img src="<%= heroData.heroMainData[6].Photo %>" alt="">
+            <h2>
+                <%- heroData.heroMainData[6].Headline %>
+            </h2>
+            <p>
+                <%- heroData.heroMainData[6].Story.slice(0,250).replace(/<\/?[^>]+(>|$)/g, "")+"..." %>
+            </p>
+            <a href="<%=heroData.heroMainData[6].WebURL %>">Read More</a>
+        </div>
+        <div class="shr-articles">
+            <img src="<%= heroData.heroMainData[7].Photo %>" alt="">
+            <h2>
+                <%- heroData.heroMainData[7].Headline %>
+            </h2>
+            <p>
+                <%- heroData.heroMainData[7].Story.slice(0,250).replace(/<\/?[^>]+(>|$)/g, "")+"..." %>
+            </p>
+            <a href="<%=heroData.heroMainData[7].WebURL %>">Read More</a>
+        </div>
+        <div class="archives">
+            <div>
+                <a href="">Current Month</a>
+            </div>
+            <div>
+                <a href="">Past Month</a>
+            </div>
+            <div>
+                <a href="">October</a>
+            </div>
+            <div>
+                <a href="">September</a> 
+            </div>
+            <div>
+                <a href="">August</a>  
+            </div>
+        </div>
+    </div>
+</section>

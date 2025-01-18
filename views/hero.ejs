@@ -1,0 +1,94 @@
+<section class="hero">
+    <!-- HERO MIDDLE -->
+    <div class="hero-main-wrapper">
+        <div class="hero-main-heading">
+            <h1>LATEST NEWS</h1>
+        </div>
+        <section class="hero-main">
+            <div class="hero-main-left scrollable">
+                <div class="su">
+                    <button style="background-image: url(assets/background.png);">
+                        <img src="assets/down-arrow.svg" alt="">
+                    </button>
+                </div>
+                <div class="hero-main-left-img">
+                    <img src="<%= heroData.heroMainData[0].Photo %>" alt="">
+                </div>
+                <div class="hero-main-left-details">
+                    <h2 id="hlfontchange">
+                        <%= heroData.heroMainData[0].Headline %>
+                    </h2>
+                    <p id="main-story">
+                        <%- heroData.heroMainData[0].Story %>
+                    </p>
+                    <div class="byline">
+                        <span>
+                            <%= heroData.heroMainData[0].Date %>
+                        </span>
+                        <span>
+                            -<%= heroData.heroMainData[0].ByLine %>
+                        </span>
+                    </div>
+                </div>
+                <div class="sd">
+                    <button style="background-image: url(assets/background.png);">
+                        <img src="assets/down-arrow.svg" alt="">
+                    </button>
+                </div>
+
+            </div>
+            <div class="hero-main-right">
+                <% for (let i=1; i<=4;i++) { %>
+                    <article>
+                        <img src="<%= heroData.heroMainData[i].Photo %>" alt="article-img"
+                            onerror="this.src='assets/news-placeholder.png'">
+                        <div class="article-details">
+                            <h2>
+                                <%= heroData.heroMainData[i].Headline %>
+                            </h2>
+                            <div class="byline">
+                                <span>
+                                    <%= heroData.heroMainData[i].Date %>
+                                </span>
+                                <span>
+                                    -<%= heroData.heroMainData[i].ByLine %>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    <%}%>
+            </div>
+
+        </section>
+    </div>
+    <div class="hero-right-wrapper">
+        <div class="hero-right-heading">
+            <h1>Quotes</h1>
+        </div>
+        <div class="quote-wrapper scrollable">
+            <div class="su">
+                <button style="background-image: url(assets/background.png);">
+                    <img src="assets/down-arrow.svg" alt="">
+                </button>
+            </div>
+            <% for (let i=0;i<heroData.quoteImg.length;i++) {%>
+                <div class="hero-right-quotes">
+                    <img src="<%= heroData.quoteImg[i].src.medium %>" alt="Image displaying the qutoes">
+                    <h2>
+                        <%= heroData.quoteArr[i].q %>
+                    </h2>
+                </div>
+                <%}%>
+                    <div class="sd">
+                        <button style="background-image: url(assets/background.png);">
+                            <img src="assets/down-arrow.svg" alt="">
+                        </button>
+                    </div>
+        </div>
+        <div class="coffee">
+            <img src="assets/filler-vines.svg" alt="">
+        </div>
+    </div>
+
+
+</section>

@@ -1,0 +1,122 @@
+.finance {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+.chart {
+    width: 60%;
+    box-sizing: border-box;
+}
+.chart h2 {
+    font-family: serial;
+    box-sizing: border-box;
+    border-bottom: 5px solid black;
+    height: 40px;
+    margin: 20px 0;
+    padding: 0 0;
+    font-weight: 600;
+    font-size: 40px;
+}
+.finance-news {
+    width: 40%;
+    box-sizing: border-box;
+    margin: 0 10px;
+}
+.finance-news-wrapper {
+    height: calc(100% - 40px - 40px);
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    box-sizing: border-box;
+}
+.finance-news-wrapper article {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px solid black;
+}
+.finance-news-wrapper article img {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.finance-news-wrapper article h3 {
+    font-family: oldnewspaper, serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 0.9em;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.finance-news-wrapper article span {
+    font-size: 0.5em;
+    font-family: oldnewspaper, serif;
+    font-weight: 500;
+    font-style: normal;
+    color: grey;
+}
+.finance-news-wrapper article .finance-article-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: auto;
+}
+.finance-news h2 {
+    font-family: serial;
+    box-sizing: border-box;
+    border-bottom: 5px solid black;
+    height: 40px;
+    margin: 20px 0;
+    padding: 0 0;
+    font-weight: 600;
+    font-size: 40px;
+    width: 100%;
+}
+.finance-chart-input {
+    padding: 5px 10px;
+    border-radius: 0.8em;
+    background-color: transparent;
+    border: 1px solid gray;
+    width: 60px;
+    transition-duration: 500ms;
+    transition-property: all;
+}
+.finance-chart-input:focus {
+    border: 1px solid gray;
+    outline: none;
+    width:100px;
+    border-radius: 0.5em;
+}
+.stock-form button {
+    padding: 0;
+    background-color: transparent;
+    margin: 0 20px;
+    border: none;
+    width: 25px;
+    height: 25px;
+}
+.stock-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.stock-form button img {
+    width: 25px;
+    height: 25px;
+    margin: 0;
+}
+
+.stock-form label {
+    font-family: oldnewspaper, serif;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    background-color: transparent;
+    width: fit-content;
+}
